@@ -1,0 +1,24 @@
+<main>
+  <h1 style="text-align: center;">Usuarios</h1>
+  <div
+    style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px"
+  >
+    <button id="btn-delete-users">Eliminar usuarios sin actividad</button>
+  </div>
+  <ul>
+    {{#each users}}
+      <li
+        style="list-style: none; margin-bottom: 10px; border: 1px solid; padding: 1rem"
+      >
+        <p>Nombre completo: {{this.name}}</p>
+        <p>E-mail: {{this.email}}</p>
+        <p>Rol: {{this.role}}</p>
+        <p class="last-connection">Last Connection: {{this.last_connection}}</p>
+        <button class="btn-delete" data-id="{{this.id}}">Eliminar Usuario
+        </button>
+      </li>
+    {{/each}}
+  </ul>
+</main>
+
+<script src="/js/users.js"></script>

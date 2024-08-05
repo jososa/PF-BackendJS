@@ -1,0 +1,74 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css">
+
+{{#if isValid}}
+<h1 class="titulo">Productos</h1>
+
+<a class="btn btn-primary" href="?sort=asc" role="button">MENOR $</a>
+<a class="btn btn-primary" href="?sort=desc" role="button">MAYOR $</a>
+
+<br/>
+
+<hr>
+
+<form action="" method="GET"  class="col-md-2 col-sm-6 p-3 justify-content-center  form_contact">
+    <label for="category">Categoría:</label>
+    <input type="text" class="form-control" id="category" name="category">
+    <button type="submit" class="btn btn-primary bg-secondary">Filtrar</button>
+</form>
+
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        {{#each products}}
+        <div class="col mb-4">
+            <div class="card h-100 bg-light">
+                <div class="card-header bg-primary text-white">
+                    <i class="bi bi-tag"></i> Codigo: {{this.code}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <ul class="list-unstyled">
+                       
+                        <li><i class="bi bi-file-text"></i> Descripcion: {{this.description}}</li>
+                        <li><i class="bi bi-currency-dollar"></i> Precio: ${{this.price}}</li>
+                        <li><i class="bi bi-grid"></i> Categoria: {{this.category}}</li>
+                        <li><i class="bi bi-check-circle"></i> Status: {{this.status}}</li>
+                        <li>
+                            <i class="bi bi-image"></i><img src="{{this.thumbnail}}" alt="{{this.title}}"
+                                class="img-fluid mt-2">
+                        </li>
+                    </ul>
+                    <div class="text-center mt-3">
+                                <label for="quantity">Cantidad</label>
+        <input name="quantity" type="number" class="quantityInput" data-id="{{this._id}}" min="1" value="1"></input>
+                <a class="btn btn-success text-lg addToCart" data-id="{{this._id}}" data-value="{{this.stock}}">Agregar al carrito</a>
+            </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<br/>
+
+<hr>
+
+<nav aria-label="Page navigation example">
+    
+  <ul class="pagination justify-content-center">
+    {{#if hasPrevPage}}
+    <li class="page-item"><a class="page-link" href="{{this.prevLink}}">Anterior</a></li>
+    {{/if}}
+
+    {{#if hasNextPage}}
+    <li class="page-item"><a class="page-link" href="{{this.nextLink}}">Siguiente</a></li>
+    {{/if}}
+  </ul>
+</nav>
+{{else}}
+<h2>No hay productos para mostrar</h2>
+{{/if}}
+
+<script src="/js/addToCart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

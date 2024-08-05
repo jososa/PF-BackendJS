@@ -1,0 +1,201 @@
+paths:
+  /api/carts:
+    post:
+      summary: Crea un carrito
+      tags:
+        - carts
+      responses:
+        201:
+          description: Se agrego correctamente el nuevo carrito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        400:
+          description: No se pudo agregar el nuevo carrito
+        403:
+          description: No tiene permisos para agregar un nuevo carrito
+        500:
+          description: No se pudo agregar el nuevo carrito
+
+  /api/carts/{cid}:
+    get:
+      summary: Obtiene los productos de un carrito por Id
+      tags:
+        - carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      responses:
+        200:
+          description: Se obtuvieron correctamente los productos del carrito
+        400:
+          description: No se encontro el carrito
+    put:
+      summary: Actualiza los productos de un carrito por Id
+      tags:
+        - carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/updateCartWithProducts"
+      responses:
+        200:
+          description: Se actualizo correctamente los productos del carrito
+        500:
+          description: No se pudo actualizar los productos del carrito
+    delete:
+      summary: Elimina un carrito por Id
+      tags:
+        - carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      responses:
+        200:
+          description: Se elimino correctamente el carrito
+        500:
+          description: No se pudo eliminar el carrito
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Agrega un producto al carrito
+      tags:
+        - carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/addProductsToCart"
+      responses:
+        200:
+          description: Se agrego correctamente el nuevo producto al carrito
+        403:
+          description: No tiene permisos para agregar un nuevo producto al carrito
+        500:
+          description: No se pudo agregar el nuevo producto al carrito
+    delete:
+      summary: Elimina un producto del carrito
+      tags:
+        - carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Se elimino correctamente el producto del carrito
+        500:
+          description: No se pudo eliminar el producto del carrito
+    put:
+      summary: Edita la cantidad de un producto en el carrito
+      tags:
+        - carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/addProductsToCart"
+      responses:
+        200:
+          description: Se modifico correctamente la cantidad del Producto en el carrito
+        500:
+          description: No se pudo modificar la cantidad del Producto en el carrito
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: object
+                properties:
+                  product:
+                    type: string
+                  quantity:
+                    type: number
+      example:
+        _id: 65fb8944d618b122104ccb54
+        products:
+          - product: 65fb8805d618b122104ccb4c
+            quantity: 2
+  requestBodies:
+    addProductsToCart:
+      type: object
+      properties:
+        quantity:
+          type: number
+          description: Cantidad del Producto
+      example:
+        quantity: 2
+    updateCartWithProducts:
+      type: array
+      items:
+        type: object
+        properties:
+          product:
+            type: string
+          quantity:
+            type: number
+      example:
+        - product: 65fb8805d618b122104ccb4c
+          quantity: 2

@@ -1,0 +1,55 @@
+/* Link a google font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@400;700&display=swap");
+/* margin reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+/* body */
+body {
+  background-color: rgba(243, 238, 227, 0.8);
+}
+
+.titulo{
+  margin-top: 25px;
+  font-size: 48px;
+  text-align: center;
+  padding: 15px;
+}
+
+form{
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgba(243,238,227,0.8);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.form_contact{
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+}
+
+.card{
+  padding: 0;
+  box-shadow: 5px 5px 5px 0px #0000006c;
+  background-color: #f2f2f2;
+}
+
+.form-check-input{
+  border: 1px solid black;
+}
+
+.card-img-top{
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}

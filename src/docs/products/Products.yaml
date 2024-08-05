@@ -1,0 +1,225 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Products
+      responses:
+        200:
+          description: Se obtuvieron correctamente todos los productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        500:
+          description: No se pudo obtener el listado de produtos
+    post:
+      summary: Crea un nuevo producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/addProduct"
+      responses:
+        201:
+          description: Se agrego correctamente el nuevo producto
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        400:
+          description: No se pudo agregar el nuevo producto
+        403:
+          description: No tiene permisos para agregar un nuevo producto
+        500:
+          description: No se pudo agregar el nuevo producto
+
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un solo producto por Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Se obtuvo correctamente el producto
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        400:
+          description: No se encontro el producto
+    put:
+      summary: Edita un producto
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/updateProduct"
+      responses:
+        200:
+          description: Se modifico correctamente el producto
+        400:
+          description: No se pudo modificar el producto
+    delete:
+      summary: Elimina un producto
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID del Producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto eliminado correctamente
+        400:
+          description: No se pudo eliminar el Producto
+        403:
+          description: No tiene permisos para eliminar un nuevo Producto
+  /api/products/code/{code}:
+    get:
+      summary: Obtiene un solo producto por codigo
+      tags:
+        - Products
+      parameters:
+        - name: code
+          in: path
+          required: true
+          description: Código del Producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Se obtuvo correctamente el Producto
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        400:
+          description: No se encontro el Producto
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identificador del producto
+        title:
+          type: string
+          description: Título del producto
+        description:
+          type: string
+          description: Descripción del producto
+        price:
+          type: number
+          description: Precio del producto
+        thumbnail:
+          type: array
+          description: Imágenes del producto
+        stock:
+          type: number
+          description: Stock del producto
+        status:
+          type: boolean
+          description: Estado del producto
+        owner:
+          type: string
+          description: Propietario del producto
+  requestBodies:
+    addProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Título del producto
+        description:
+          type: string
+          description: Descripción del producto
+        price:
+          type: number
+          description: Precio del Producto
+        thumbnail:
+          type: array
+          description: Imágenes del Producto
+        stock:
+          type: number
+          description: Stock del Producto
+        status:
+          type: boolean
+          description: Estado del Producto
+        code:
+          type: string
+          description: Código del Producto
+        owner:
+          type: string
+          description: Propietario del Producto
+      example:
+        title: "Macbook"
+        description: "Macbook Air"
+        price: 200
+        thumbnail: ["http://example.com/img.jpg"]
+        stock: 10
+        status: true
+        code: "MAI001"
+        owner: "admin"
+    updateProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Título del producto
+        description:
+          type: string
+          description: Descripción del producto
+        price:
+          type: number
+          description: Precio del Producto
+        thumbnail:
+          type: array
+          description: Imagen del Producto
+        stock:
+          type: number
+          description: Stock del Producto
+        status:
+          type: boolean
+          description: Estado del Producto
+        code:
+          type: string
+          description: Codigo del Producto
+        owner:
+          type: string
+          description: Propietario del Producto
+      example:
+        title: "Macbook"
+        description: "Mackbook Air"
+        price: 200
+        thumbnail: ["http://example.com/img.jpg"]
+        stock: 10
+        status: true
+        code: "MAI001"
+        owner: "admin"

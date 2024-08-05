@@ -1,0 +1,7 @@
+{
+    "watch": ["src", "*.env", "*.yaml"],
+    "ext": "js,json,env,yaml,hbs",
+    "ignore": ["node_modules"],
+    "exec": "node src/app.js"
+  }
+  

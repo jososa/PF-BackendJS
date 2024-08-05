@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Carrito</h1>
+
+    {{#if result}}
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text"><strong>Cart ID:</strong> {{result._id}}</p>
+
+                <ul class="list-group">
+                    {{#each result.products }}
+                        <li class="list-group-item">
+                            <h3 class="mb-2">Title: {{this.product.title}}</h3>
+                            <p class="mb-1">Description: {{this.product.description}}</p>
+                            <p class="mb-1">Category: {{this.product.category}}</p>
+                            <p class="mb-1">Quantity: {{this.quantity}}</p>
+                            <button class="deleteFromCart" data-id={{this.product._id}}>Eliminar del
+          Carrito</button>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+              <button id="finalizarBtn">Finalizar compra</button>
+        </div>
+    {{else}}
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Carrito vacío</h4>
+            <p>{{message}}</p>
+        </div>
+    {{/if}}
+</div>
+
+<script src="/js/cart.js"></script>
