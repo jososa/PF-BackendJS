@@ -10,7 +10,6 @@ import { generateToken, validateToken } from "../utils/jwt.js"
 import { userRepository } from "../dao/repositories/index.js"
 import userModel from "../dao/mongoDB/models/usersModel.js"
 import moment from "moment"
-import { environment } from "../config/config.js"
 
 class UserController {
 
