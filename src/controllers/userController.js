@@ -10,6 +10,7 @@ import { generateToken, validateToken } from "../utils/jwt.js"
 import { userRepository } from "../dao/repositories/index.js"
 import userModel from "../dao/mongoDB/models/usersModel.js"
 import moment from "moment"
+import { environment } from "../config/config.js"
 
 class UserController {
 
@@ -202,7 +203,7 @@ class UserController {
           to: user.email,
           subject: "Recuperá tu contraseña",
           html: `<div><h1>¡Hacé click en el siguiente link para recuperar tu contraseña!</h1>
-              <a href="http://localhost:${environment.port}/restorepass/${token}"}>Restaurá tu contraseña haciendo click aquí</a>
+              <a href="${environment.BASE_URL}/restorepass/${token}"}>Restaure su contraseña haciendo click aquí</a>
                   </div>`,
         })
         res.send({ status: "success", message: "Email enviado" })
@@ -234,7 +235,7 @@ class UserController {
               to: user.email,
               subject: "Tu cuenta ha sido eliminada",
               html: `<div><h1>¡Hemos eliminado tu cuenta por inactividad!</h1>
-                <a href="http://localhost:${environment.port}/register">Si quieres volver a crear una cuenta puedes hacerlo desde aquí</a>
+                <a href="${environment.BASE_URL}/register">Si desea volver a crear una cuenta puede hacerlo aquí</a>
                     </div>`,
             })
           }

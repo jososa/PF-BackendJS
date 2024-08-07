@@ -11,6 +11,7 @@ export const environment = {
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL,
     NODE_ENV: process.env.NODE_ENV,
+    BASE_URL: process.env.BASE_URL,
     mailing: {
         PASSWORD: process.env.MAILING_PASSWORD,
         SERVICE: process.env.MAILING_SERVICE,

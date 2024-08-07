@@ -10,6 +10,7 @@ import { adminViewAuth, auth } from "../middlewares/auth.js"
 import { userService } from "../dao/services/users.service.js"
 import { ticketService } from "../dao/services/tickets.service.js"
 import UserDTO from "../dao/DTO/userDTO.js"
+import { environment } from "../config/config.js"
 
 const viewsRouter = Router()
 //const productos = new ProductManager()
@@ -55,10 +56,10 @@ viewsRouter.get("/products", auth, async (req, res) => {
     try {
         let allProducts = await productRepository.getAllProducts(req.query)
       allProducts.prevLink = allProducts.hasPrevPage
-        ? `http://localhost:8080/products?page=${allProducts.prevPage}`
+        ? `${environment.BASE_URL}/products?page=${allProducts.prevPage}`
         : "";
         allProducts.nextLink = allProducts.hasNextPage
-        ? `http://localhost:8080/products?page=${allProducts.nextPage}`
+        ? `${environment.BASE_URL}/products?page=${allProducts.nextPage}`
         : "";
         allProducts.isValid = !(
         req.query.page < 1 || req.query.page > allProducts.totalPages
